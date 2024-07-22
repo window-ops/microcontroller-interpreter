@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microcontroller Interpreter</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container my-5">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <h1 class="text-center text-primary mb-4">Microcontroller Interpreter</h1>
+          <div class="card">
+            <div class="card-body">
+              <textarea id="codeInput" class="form-control mb-3" rows="10" placeholder="Enter your code here..."></textarea>
+              <button id="runButton" class="btn btn-primary btn-block">Run</button>
+            </div>
+          </div>
+          <div id="console" class="console mt-4 p-3 border rounded bg-light"></div>
+          <div class="manual mt-4 p-3 border rounded bg-white">
+            <h2 class="text-primary mb-3">Command Manual</h2>
+            <p>This interpreter simulates a simple microcontroller environment, allowing users to define variables, perform arithmetic operations, and implement conditional logic. This tool is designed for educational purposes, providing a hands-on way to learn about basic programming concepts. Note that while this simulation mimics some basic features of a microcontroller, it does not support attaching components.</p>
+            <h3>Accumulator</h3>
+            <p>The <strong>accumulator</strong> (<code>acc</code>) is a special variable used to store the results of recent arithmetic operations. It acts as a temporary storage space that holds the output of calculations, allowing users to reference the result in subsequent commands. The value of <code>acc</code> can be printed to the console or used in conditional statements, making it a crucial element in the flow of the program. </p>
+            <h3>Comments</h3>
+            <p>Comments can be added to the code using the <code>#</code> syntax. Any text following <code>#</code> on the same line will be ignored by the interpreter. This feature is useful for adding notes or explanations to your code, making it easier to understand and maintain. </p>
+            <h3>Available Commands</h3>
+            <table class="table table-bordered">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Command</th>
+                  <th>Description</th>
+                  <th>Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <code>def name value</code>
+                  </td>
+                  <td>Defines a variable with an initial value.</td>
+                  <td>
+                    <code>def x 10</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>set name value</code>
+                  </td>
+                  <td>Sets a variable to a new value.</td>
+                  <td>
+                    <code>set x 15</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>mov src dst</code>
+                  </td>
+                  <td>Moves the value from one variable to another.</td>
+                  <td>
+                    <code>mov x y</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>inc name</code>
+                  </td>
+                  <td>Increments a variable by 1.</td>
+                  <td>
+                    <code>inc x</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>dec name</code>
+                  </td>
+                  <td>Decrements a variable by 1.</td>
+                  <td>
+                    <code>dec x</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>add var var</code>
+                  </td>
+                  <td>Adds two variables and stores the result in the accumulator.</td>
+                  <td>
+                    <code>add x y</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>sub var var</code>
+                  </td>
+                  <td>Subtracts the second variable from the first and stores the result in the accumulator.</td>
+                  <td>
+                    <code>sub y x</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>mul var var</code>
+                  </td>
+                  <td>Multiplies two variables and stores the result in the accumulator.</td>
+                  <td>
+                    <code>mul x y</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>div var var</code>
+                  </td>
+                  <td>Divides the first variable by the second and stores the result in the accumulator.</td>
+                  <td>
+                    <code>div x y</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>mod var var</code>
+                  </td>
+                  <td>Divides the first variable by the second, gets the remainder, and stores the result in the accumulator.</td>
+                  <td>
+                    <code>mod x y</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>print var</code>
+                  </td>
+                  <td>Outputs the value of a variable or the accumulator.</td>
+                  <td>
+                    <code>print acc</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>printstr string</code>
+                  </td>
+                  <td>Outputs a string directly to the console.</td>
+                  <td>
+                    <code>printstr "Hello, World!"</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>if x y</code>
+                  </td>
+                  <td>Begins a conditional block based on a condition (equality (<code>eq</code>), inequality (<code>neq</code>), greater than (<code>gt</code>), less than (<code>lt</code>)).</td>
+                  <td>
+                    <code>if eq x y</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>elseif x y</code>
+                  </td>
+                  <td>Introduces an alternative conditional block.</td>
+                  <td>
+                    <code>elseif gt x y</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>else</code>
+                  </td>
+                  <td>Provides an alternative action if all preceding conditions are false.</td>
+                  <td>
+                    <code>else</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>endif</code>
+                  </td>
+                  <td>Marks the end of a conditional block.</td>
+                  <td>
+                    <code>endif</code>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <h3>Example Code</h3>
+            <p>The following example demonstrates the use of some commands in a single program:</p>
+            <pre>
+def x 10
+def y 20
+add x y
+
+if eq acc 30
+    print x
+elseif eq acc 40
+    print y
+endif
+
+set y 25
+add x y
+print acc
+printstr Calculation complete!
+
+mov x y
+inc y
+dec x</pre>
+            <p>This code performs the following actions:</p>
+            <ul>
+              <li>Defines two variables, <code>x</code> and <code>y</code>. </li>
+              <li>Adds <code>x</code> and <code>y</code> and stores the result in the accumulator (<code>acc</code>). </li>
+              <li>Checks if <code>acc</code> equals 30 and prints <code>x</code> if true; otherwise, checks if <code>acc</code> equals 40 and prints <code>y</code>. </li>
+              <li>Sets <code>y</code> to a new value of 25. </li>
+              <li>Adds the updated <code>y</code> to <code>x</code> and prints the new value of <code>acc</code>. </li>
+              <li>Prints the string "Calculation complete!" to indicate the end of the program.</li>
+              <li>Moves the value of <code>x</code> to <code>y</code>. </li>
+              <li>Increments the value of <code>y</code> by 1. </li>
+              <li>Decrements the value of <code>x</code> by 1. </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
