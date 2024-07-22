@@ -112,11 +112,18 @@ function convertToJS(code) {
             }
             break;
           case 'print':
-            jsLines.push(`document.getElementById('console').innerHTML += acc + '<br>';`);
+            jsLines.push(`document.getElementById('console').innerHTML += ${tokens[1]} + '<br>';`);
             break;
           case 'printstr':
             const str = line.substring(8); // Extract the string without quotes
             jsLines.push(`document.getElementById('console').innerHTML += '${str}' + '<br>';`);
+            break;
+          case 'loop':
+            const loopCount = parseInt(tokens[1]);
+            jsLines.push(`for (let index = 0; index < ${loopCount}; index++) {`);
+            break;
+          case 'endloop':
+            jsLines.push(`}`);
             break;
           case 'if':
             const condition = tokens[1];
