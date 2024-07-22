@@ -181,20 +181,20 @@
                 </tr>
                 <tr>
                   <td>
-                    <code>endloop</code>
-                  </td>
-                  <td>Marks the end of a <code>loop</code> block. </td>
-                  <td>
-                    <code>endloop</code>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
                     <code>loop count</code>
                   </td>
                   <td>Begins a loop that runs for a specified number of times. The variable <code>index</code> is a reserved value if you use a loop.</td>
                   <td>
                     <code>loop 5</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>endloop</code>
+                  </td>
+                  <td>Marks the end of a <code>loop</code> block.</td>
+                  <td>
+                    <code>endloop</code>
                   </td>
                 </tr>
               </tbody>
@@ -204,7 +204,11 @@
             <pre>
 def x 10
 def y 20
+def i 0
+
 add x y
+
+set y 25
 
 if eq acc 30
     print x
@@ -212,14 +216,12 @@ elseif eq acc 40
     print y
 endif
 
-set y 25
-add x y
-print acc
-printstr Calculation complete!
+loop 5
+    inc i
+    print i
+endloop
 
-mov x y
-inc y
-dec x</pre>
+mov x y</pre>
             <p>This code performs the following actions:</p>
             <ul>
               <li>Defines two variables, <code>x</code> and <code>y</code>. </li>
